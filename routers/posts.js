@@ -1,62 +1,22 @@
 const express = require("express");
 const router = express.Router();
 
-// Array dei post
-let posts = [
-  {
-    title: "Ciambellone",
-    content: "Ciambellone ripieno.",
-    image: "/images/ciambellone.jpeg",
-    tags: ["soffice", "ripieno"],
-  },
-  {
-    title: "Cracker Barbabietola",
-    content: "Cracker alla barbabietola.",
-    image: "/images/cracker_barbabietola.jpeg",
-    tags: ["viola", "croccante"],
-  },
-  {
-    title: "Pane Fritto",
-    content: "Pane fritto e dolce.",
-    image: "/images/pane_fritto_dolce.jpeg",
-    tags: ["fritto", "dolce"],
-  },
-  {
-    title: "Pasta Barbabietola",
-    content: "Pasta alla barbabietola.",
-    image: "/images/pasta_barbabietola.jpeg",
-    tags: ["pasta", "barbabietola"],
-  },
-  {
-    title: "Torta Paesana",
-    content: "Torta di latte.",
-    image: "/images/torta_paesana.jpeg",
-    tags: ["latte", "torta"],
-  },
-];
+// Importiamo il controller dei post
+const postsController = require("../controllers/postsController");
 
 // INDEX - Mostra tutti i post
-router.get("/posts", function (req, res) {
-  res.send("Lista di tutti i post");
-});
+router.get("/posts", postsController.getAllPosts);
+
 // SHOW - Mostra un post specifico
-router.get("/posts/:title", function (req, res) {
-  res.send("Dettagli del post: " + req.params.title);
-});
+router.get("/posts/:title", postsController.getPostByTitle);
 
 // CREATE - Crea un nuovo post
-router.post("/posts", function (req, res) {
-  res.send("Creazione nuovo post");
-});
+router.post("/posts", postsController.createPost);
 
 // UPDATE - Modifica integrale di un post
-router.put("/posts/:title", function (req, res) {
-  res.send("Modifica integrale del post: " + req.params.title);
-});
+router.put("/posts/:title", postsController.updatePost);
 
 // DELETE - Elimina un post
-router.delete("/posts/:title", function (req, res) {
-  res.send("Eliminazione del post: " + req.params.title);
-});
+router.delete("/posts/:title", postsController.deletePost);
 
 module.exports = router;
