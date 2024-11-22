@@ -3,14 +3,13 @@ const posts = require("../data/postsData");
 
 // Funzione per ottenere tutti i post
 const getAllPosts = (req, res) => {
-  // Invia la lista di tutti i post come risposta in formato JSON
   res.json(posts);
 };
 
-// Funzione ottenere un singolo post
-const getPostByTitle = (req, res) => {
-  // Troviamo il post che corrisponde al titolo specificato nell'URL
-  const post = posts.find((p) => p.title === req.params.title);
+// Funzione per ottenere un singolo post tramite ID
+const getPostById = (req, res) => {
+  // Trovo il post che corrisponde all'ID
+  const post = posts.find((p) => p.id === parseInt(req.params.id));
 
   // Se il post non viene trovato, restituisco un errore 404
   if (!post) {
@@ -21,10 +20,10 @@ const getPostByTitle = (req, res) => {
   res.json(post);
 };
 
-// Funzione per eliminare un post
+// Funzione per eliminare un post tramite ID
 const deletePost = (req, res) => {
-  // Trovol'indice del post
-  const index = posts.findIndex((p) => p.title === req.params.title);
+  // Trovo l'indice del post che corrisponde all'ID
+  const index = posts.findIndex((p) => p.id === parseInt(req.params.id));
 
   // Se il post non viene trovato, restituisco un errore 404
   if (index === -1) {
@@ -34,7 +33,6 @@ const deletePost = (req, res) => {
   // Rimuovo il post dalla lista dei post
   posts.splice(index, 1);
 
-  // Stampo nel terminale la lista aggiornata dei post
   console.log("Lista aggiornata dei post:", posts);
 
   // Rispondo con un codice di stato 204 (No Content), indicando che il post è stato eliminato
@@ -44,6 +42,6 @@ const deletePost = (req, res) => {
 // Esporto le funzioni
 module.exports = {
   getAllPosts,
-  getPostByTitle,
+  getPostById,
   deletePost,
 };
