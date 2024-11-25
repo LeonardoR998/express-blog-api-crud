@@ -1,22 +1,23 @@
-// Importo il modulo 'express' per creare un'applicazione web
+// Importo il modulo express e creo un nuovo router
 const express = require("express");
-
-// Crea un oggetto router per gestire le rotte in modo separato
 const router = express.Router();
 
-// Importo il controller che contiene le funzioni per gestire i post
+// Importo il controller che gestisce la logica delle rotte
 const postsController = require("../controllers/postsController");
 
-// ! Imposto le rotte per gestire le richieste HTTP
-
-// Rotta per ottenere tutti i post.
+// Rotta per ottenere tutti i post
 router.get("/posts", postsController.getAllPosts);
 
-// Rotta per ottenere un singolo post tramite il suo ID.
+// Rotta per ottenere un singolo post
 router.get("/posts/:id", postsController.getPostById);
 
-// Rotta per eliminare un post tramite l'ID.
+// Rotta per eliminare un post
 router.delete("/posts/:id", postsController.deletePost);
 
-// Esporto il router in modo che possa essere utilizzato in altre parti dell'applicazione
+// Rotta per aggiungere un nuovo post
+router.post("/posts", postsController.addPost);
+
+// Rotta per aggiornare un post
+router.put("/posts/:id", postsController.updatePost);
+
 module.exports = router;

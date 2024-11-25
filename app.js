@@ -1,18 +1,17 @@
-// app.js
-
 const express = require("express");
 const app = express();
 
-// Imposto la porta
-const port = 3000;
-
-app.use(express.json());
-
-// Importo le rotte
+// Importo il router delle rotte dei post
 const postsRouter = require("./routers/posts");
 
-// Imposto il routing con il router delle rotte dei post
+// Utilizzo il middleware
+app.use(express.json());
+
+// Imposto il routing con il router dei post
 app.use("/", postsRouter);
+
+// Imposto la porta
+const port = 3000;
 
 // Avvio il server sulla porta specificata
 app.listen(port, () => {
